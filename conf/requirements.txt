@@ -1,0 +1,5 @@
+Django==1.6.1
+pytz==2013.9
+pylibmc==1.2.3
+psycopg2==2.5.1
+Pillow==2.3.0
