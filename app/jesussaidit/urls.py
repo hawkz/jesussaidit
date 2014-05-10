@@ -12,6 +12,10 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
+
+    url(r'^chapter/(?P<pk>\d+)/$', ChapterView.as_view(), name='chapter-view'),
+    url(r'^(?P<slug>[-\w]+)/$', QuoteView.as_view(), name='quote-view'),
+    url(r'^$', AllQuotesView.as_view(), name='quote-list'),
 )
 
 # Serving static/media under debug

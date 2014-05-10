@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+
+{% block content %}
+<nav>
+    {% if object.prev %}<a href="{{ object.prev.get_absolute_url }}" class="prev">&larr;</a>{% endif %}
+    {% if object.next %}<a href="{{ object.next.get_absolute_url }}" class="next">&rarr;</a>{% endif %}
+</nav>
+<header>
+    <blockquote>
+        <h1>{{ object.quote|safe }}</h1>
+        <cite>{{ object.chapter.get_book_display }}, Chapter {{ object.chapter.chapter }}, Verse {{ object.verse }}</cite>
+    </blockquote>
+    <h2><a href="/">Jesus said <em>it</em></a></h2>
+    <nav><a href="{{ object.chapter.get_absolute_url }}">View Context</a> | <a href="/">View all</a>
+        <ul>
+            <li><a class="you active" href="#">You</a></li>
+        </ul>
+    </nav>
+</header>
+<article>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'jesussaidit'; // required: replace example with your forum shortname
+        var disque_identifier = '{{ object.get_book_display }}-{{ object.chapter }}-{{ object.verse }}';
+
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+</article>
+{% endblock %}

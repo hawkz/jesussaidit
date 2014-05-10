@@ -51,6 +51,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'jesussaidit.quotes'
 )
 
 MIDDLEWARE_CLASSES = (

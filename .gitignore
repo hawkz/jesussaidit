@@ -3,3 +3,5 @@
 /htdocs/media
 /htdocs/static
 /pyenv
+
+.DS_Store
