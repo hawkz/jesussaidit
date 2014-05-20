@@ -13,7 +13,8 @@
 <header>
     <blockquote>
         <h1>{{ object.quote|safe }}</h1>
-        <cite>{{ object.chapter.get_book_display }}, Chapter {{ object.chapter.chapter }}, Verse {{ object.verse }}</cite>
+        <cite>{{ object.chapter.get_book_display }}, Chapter {{ object.chapter.chapter }}, Verse {{ object.verse }}
+            {% if object.verse|add:'1' < object.endverse %} - {{ object.endverse }}{% endif %}</cite>
     </blockquote>
     <h2><a href="/">Jesus said <em>it</em></a></h2>
     <nav><a href="{{ object.chapter.get_absolute_url }}">View Context</a> | <a href="/">View all</a>
