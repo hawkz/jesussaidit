@@ -13,7 +13,6 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
 
-    #url(r'^chapter/(?P<pk>\d+)/$', ChapterView.as_view(), name='chapter-view'),
     url(r'^(?P<book>[-\w]+)/(?P<chapter>\d+)/(?P<verse>\d+)/$', quote_view, name='quote-view'),
     url(r'^(?P<book>[-\w]+)/(?P<chapter>\d+)/$', chapter_view, name='chapter-view'),
     url(r'^$', AllQuotesView.as_view(), name='quote-list'),
