@@ -8,7 +8,7 @@ class AllQuotesView(ListView):
 
 
 class QuoteView(DetailView):
-    model = Quote
+    queryset = Quote.objects.select_related().all()
     slug_field = 'slug'
 
 
