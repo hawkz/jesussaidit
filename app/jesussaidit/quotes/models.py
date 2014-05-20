@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 
 
 class Chapter(models.Model):
@@ -14,11 +15,17 @@ class Chapter(models.Model):
         (66, 'Revelation'),
     )
     book = models.IntegerField(max_length=2, choices=BOOK)
+    slug = models.SlugField(max_length=20, editable=False)
     chapter = models.IntegerField(max_length=3)
     content = models.TextField()
 
     def __unicode__(self):
-        return "{book} - {chapter}".format(book=self.book, chapter=self.chapter)
+        return "{book} - {chapter}".format(book=self.get_book_display(), chapter=self.chapter)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.get_book_display())
+        super(Chapter, self).save(*args, **kwargs)
 
     class Meta:
         unique_together = ('book', 'chapter')
@@ -38,18 +45,20 @@ class Chapter(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('chapter-view', (), {'pk': self.id})
+        return ('chapter-view', (), {'book': self.slug.strip(),
+                                     'chapter': unicode(self.chapter)})
 
 
 class Quote(models.Model):
     quote = models.TextField()
-    slug = models.SlugField(max_length=100, unique=True)
     chapter = models.ForeignKey(Chapter)
     verse = models.IntegerField(max_length=3)
     endverse = models.IntegerField(max_length=3)
 
     def __unicode__(self):
-        return self.slug
+        return "{book} - {chapter} - {verse}".format(book=self.chapter.get_book_display(),
+                                                     chapter=self.chapter.chapter,
+                                                     verse=self.verse)
 
     class Meta:
         unique_together = ('chapter', 'verse')
@@ -57,16 +66,18 @@ class Quote(models.Model):
 
     def next(self):
         try:
-            return Quote.objects.filter(id__gt=self.id).order_by('id')[0]
+            return Quote.objects.filter(id__gt=self.id).select_related().defer("chapter__content").order_by('id')[0]
         except IndexError:
             return None
 
     def prev(self):
         try:
-            return Quote.objects.filter(id__lt=self.id).order_by('-id')[0]
+            return Quote.objects.filter(id__lt=self.id).select_related().defer("chapter__content").order_by('-id')[0]
         except IndexError:
             return None
 
     @models.permalink
     def get_absolute_url(self):
-        return ('quote-view', (), {'slug': self.slug})
+        return ('quote-view', (), {'book': self.chapter.slug.strip(),
+                                   'chapter': unicode(self.chapter.chapter),
+                                   'verse': unicode(self.verse)})
