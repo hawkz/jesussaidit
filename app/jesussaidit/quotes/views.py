@@ -3,7 +3,7 @@ from jesussaidit.quotes.models import Quote, Chapter
 
 
 class AllQuotesView(ListView):
-    model = Quote
+    queryset = Quote.objects.select_related().defer("chapter__content").all()
     allow_empty = False
 
 
