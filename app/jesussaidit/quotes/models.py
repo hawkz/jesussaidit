@@ -20,7 +20,7 @@ class Chapter(models.Model):
     content = models.TextField()
 
     def __unicode__(self):
-        return "{book} - {chapter}".format(book=self.get_book_display(), chapter=self.chapter)
+        return "{book} Chapter {chapter}".format(book=self.get_book_display(), chapter=self.chapter)
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -56,7 +56,7 @@ class Quote(models.Model):
     endverse = models.IntegerField(max_length=3)
 
     def __unicode__(self):
-        return "{book} - {chapter} - {verse}".format(book=self.chapter.get_book_display(),
+        return "{book} Chapter {chapter} v{verse}".format(book=self.chapter.get_book_display(),
                                                      chapter=self.chapter.chapter,
                                                      verse=self.verse)
 
