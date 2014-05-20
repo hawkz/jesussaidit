@@ -12,7 +12,7 @@
             <h1>{{ object.quote|safe }}</h1>
             <cite>{{ object.chapter.get_book_display }}, Chapter {{ object.chapter.chapter }}, Verse {{ object.verse }}</cite>
         </blockquote>
-        <h2><a href="/">Jesus said <em>it</em></a></h2>
+        <h2><a href="/"><img src="{% static img %}" alt="Jesus" />Jesus said <em>it</em></a></h2>
         <nav><p>The red bits (things Jesus said)</p></nav>
     </header>
 {% endwith %}
