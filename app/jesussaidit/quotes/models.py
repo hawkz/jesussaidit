@@ -42,16 +42,6 @@ class Chapter(models.Model):
 
 
 class Quote(models.Model):
-    BOOK = (
-        (40, 'Matthew'),
-        (41, 'Mark'),
-        (42, 'Luke'),
-        (43, 'John'),
-        (44, 'Acts'),
-        (54, '1 Timothy'),
-        (66, 'Revelation'),
-    )
-
     quote = models.TextField()
     slug = models.SlugField(max_length=100, unique=True)
     chapter = models.ForeignKey(Chapter)
