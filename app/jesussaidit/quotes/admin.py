@@ -4,7 +4,7 @@ from models import *
 
 class QuoteAdmin(admin.ModelAdmin):
     list_display = ('id', 'chapter', 'verse')
-    list_filter = ['chapter']
+    list_filter = ['chapter__book', 'chapter__chapter']
     search_fields = ['quote']
 
 
