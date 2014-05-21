@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+
+{% block content %}
+
+
+<article>
+    {% if object_list %}
+        <h1>Read one of the {{ object_list|length }} verses, and comment with your reactions and thoughts.</h1>
+            {% for x in object_list %}
+                {% with x.chapter as cha %}
+                    {% ifchanged cha.book %}<h2>{{ cha.get_book_display }}</h2>{% endifchanged %}
+                {% endwith %}
+                {% ifchanged x.chapter %}<strong>Chapter {{ x.chapter.chapter }}</strong>{% endifchanged %}
+                <a href="{{ x.get_absolute_url }}" title="{{ x }}">{{ x.verse }}</a>
+            {% endfor %}
+        </ul>
+    {% else %}
+        Please search for something
+    {% endif %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if object_list.has_previous %}
+            <a href="?q={{ search_string }}&page={{ object_list.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+        </span>
+
+        {% if object_list.has_next %}
+            <a href="?q={{ search_string }}&page={{ object_list.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+
+</article>
+
+{% endblock %}

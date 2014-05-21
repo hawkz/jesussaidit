@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^(?P<book>[-\w]+)/(?P<chapter>\d+)/(?P<verse>\d+)/$', quote_view, name='quote-view'),
     url(r'^(?P<book>[-\w]+)/(?P<chapter>\d+)/$', chapter_view, name='chapter-view'),
     url(r'^$', AllQuotesView.as_view(), name='quote-list'),
+    url(r'^search/$', search, name='search'),
 )
 
 # Serving static/media under debug
