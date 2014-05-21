@@ -39,118 +39,118 @@ body {
     -webkit-filter: grayscale(0%);
 }
 
-header {
+.head {
     overflow: hidden;
+}
 
-    blockquote {
-        margin: 0;
-        background: white;
-        padding: 2em 3em 2em 5em;
-        color: @fore;
-        position: relative;
+.quote {
+    margin: 0;
+    background: white;
+    padding: 2em 3em 2em 5em;
+    color: @fore;
+    position: relative;
+    &:before, &:after {
+        content: ' ';
+        position: absolute;
+        bottom: -1.5em;
+        width: 1.5em;
+        height: 1.5em;
+        margin-left: 0.1em;
+        background: @fore;
+        z-index: 100;
+
+    }
+    &:after {
+        width: 0;
+        height: 0;
+        margin-left: 1.6em;
+        border-left: 0 solid transparent;
+        border-right: 3em solid transparent;
+        border-top: 1.5em solid white;
+    }
+
+    h1 {
+        color: @grey;
+        font-size: 3.3em;
+        letter-spacing: -0.03em;
         &:before, &:after {
-            content: ' ';
+            content: '\201C';
             position: absolute;
-            bottom: -1.5em;
-            width: 1.5em;
-            height: 1.5em;
-            margin-left: 0.1em;
-            background: @fore;
-            z-index: 100;
-
+            margin-left: -0.4em;
+            color: @grey;
         }
         &:after {
-            width: 0;
-            height: 0;
-            margin-left: 1.6em;
-            border-left: 0 solid transparent;
-            border-right: 3em solid transparent;
-            border-top: 1.5em solid white;
+            content: '\201D';
+            margin-left: 0;
         }
 
-        h1 {
+        .verse { font-size: 50%; }
+
+        .wj {
+            color: @red;
+        }
+
+        .q, .q2, .p { display: inline; }
+
+        .notemark { display: none; }
+
+        .label {
+            display: inline-block;
+            font-size: 50%;
             color: @grey;
-            font-size: 3.3em;
-            letter-spacing: -0.03em;
-            &:before, &:after {
-                content: '\201C';
-                position: absolute;
-                margin-left: -0.4em;
-                color: @grey;
-            }
-            &:after {
-                content: '\201D';
-                margin-left: 0;
-            }
-
-            .verse { font-size: 50%; }
-
-            .wj {
-                color: @red;
-            }
-
-            .q, .q2, .p { display: inline; }
-
-            .notemark { display: none; }
-
-            .label {
-                display: inline-block;
-                font-size: 50%;
-                color: @grey;
-                margin-top: 0;
-            }
-
-            .note {
-                display: none;
-                color: @grey;
-            }
-
-            .content {
-                color: @grey;
-            }
+            margin-top: 0;
         }
 
-        cite {
-            position: absolute;
-            margin-top: -1em;
-            right: 3em;
-            font-style: normal;
+        .note {
+            display: none;
             color: @grey;
         }
 
-        small {
-            font-size: 0.75em;
+        .content {
+            color: @grey;
         }
     }
 
-    h2 {
-        margin-top: 2em;
-        padding-left: 9em;
-        padding-top: 0.3em;
-        margin-bottom: 0.4em;
-        font-size: 1em;
+    cite {
+        position: absolute;
+        margin-top: -1em;
+        right: 3em;
+        font-style: normal;
+        color: @grey;
+    }
 
-        img {
-            display: block;
-            position: absolute;
-            margin-left: -4em;
-            margin-top: -.3em;
-            width: 3.125em;
-            height: 3.125em;
-            border-radius: 100%;
-        }
-
-        em {
-            color: @red;
-            font-style: normal;
-        }
-        a {
-            color: white;
-        }
+    small {
+        font-size: 0.75em;
     }
 }
 
-nav {
+h2 {
+    margin-top: 2em;
+    padding-left: 9em;
+    padding-top: 0.3em;
+    margin-bottom: 0.4em;
+    font-size: 1em;
+
+    img {
+        display: block;
+        position: absolute;
+        margin-left: -4em;
+        margin-top: -.3em;
+        width: 3.125em;
+        height: 3.125em;
+        border-radius: 100%;
+    }
+
+    em {
+        color: @red;
+        font-style: normal;
+    }
+    a {
+        color: white;
+    }
+}
+
+.nav {
     padding-left: 11em;
     color: darken(@grey, 30%);
     font-size: 0.8em;

@@ -14,13 +14,13 @@
         {% if next %}<a href="{{ next.get_absolute_url }}" class="next">&rarr;</a>{% endif %}
     {% endwith %}
 </nav>
-<header>
-    <blockquote>
+<header class="head">
+    <blockquote class="quote">
         <div class="chapter-quote">{{ object.content|safe }}</div>
         <cite>{{ object.get_book_display }}, Chapter {{ object.chapter }}</cite>
     </blockquote>
     <h2><a href="/"><img src="{% static img %}" alt="Jesus" />Jesus said <em>it</em></a></h2>
-    <nav><a href="/">View all</a>
+    <nav class="nav"><a href="/">View all</a>
         <ul>
             <li><a class="you active" href="#">You</a></li>
         </ul>

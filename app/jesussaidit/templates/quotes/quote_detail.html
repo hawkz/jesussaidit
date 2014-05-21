@@ -6,25 +6,24 @@
 {% block description %}{{ object.quote|striptags }}{% endblock %}
 
 {% block content %}
-<nav>
-    {% with prev=object.prev %}
-        {% if prev %}<a href="{{ prev.get_absolute_url }}" class="prev">&larr;</a>{% endif %}
-    {% endwith %}
-    {% with next=object.next %}
-        {% if next %}<a href="{{ next.get_absolute_url }}" class="next">&rarr;</a>{% endif %}
-    {% endwith %}
-</nav>
-<header>
-    <blockquote>
+
+<header class="head">
+    <blockquote class="quote">
         <h1>{{ object.quote|safe }}</h1>
         <cite>{{ object.chapter.get_book_display }}, Chapter {{ object.chapter.chapter }}, Verse {{ object.verse }}
             {% if object.verse|add:'1' < object.endverse %} - {{ object.endverse }}{% endif %}</cite>
     </blockquote>
     <h2><a href="/"><img src="{% static img %}" alt="Jesus" />Jesus said <em>it</em></a></h2>
-    <nav><a href="{{ object.chapter.get_absolute_url }}">View Context</a> | <a href="/">View all</a>
+    <nav class="nav"><a href="{{ object.chapter.get_absolute_url }}">View Context</a> | <a href="/">View all</a>
         <ul>
             <li><a class="you active" href="#">You</a></li>
         </ul>
+        {% with prev=object.prev %}
+            {% if prev %}<a href="{{ prev.get_absolute_url }}" class="prev">&larr;</a>{% endif %}
+        {% endwith %}
+        {% with next=object.next %}
+            {% if next %}<a href="{{ next.get_absolute_url }}" class="next">&rarr;</a>{% endif %}
+        {% endwith %}
     </nav>
 </header>
 <article>
