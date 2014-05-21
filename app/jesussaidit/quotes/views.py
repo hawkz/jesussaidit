@@ -32,8 +32,9 @@ def search(request):
         object_list = paginator.page(paginator.num_pages)
 
     return render_to_response("quotes/search_results.html",
-                              {"object_list": object_list,
-                               "search_string": request.GET.get(QUERY, ""), })
+                              {'object_list': object_list,
+                               'img': 'img/jesus{r}.png'.format(r=randint(1, 30)),
+                               'search_string': request.GET.get(QUERY, ""), })
 
 
 class AllQuotesView(ListView):

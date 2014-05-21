@@ -2,22 +2,29 @@
 {% load static from staticfiles %}
 
 {% block content %}
-
-
-<article>
-    {% if object_list %}
-        <h1>Read one of the {{ object_list|length }} verses, and comment with your reactions and thoughts.</h1>
-            {% for x in object_list %}
-                {% with x.chapter as cha %}
-                    {% ifchanged cha.book %}<h2>{{ cha.get_book_display }}</h2>{% endifchanged %}
-                {% endwith %}
-                {% ifchanged x.chapter %}<strong>Chapter {{ x.chapter.chapter }}</strong>{% endifchanged %}
-                <a href="{{ x.get_absolute_url }}" title="{{ x }}">{{ x.verse }}</a>
-            {% endfor %}
-        </ul>
-    {% else %}
-        Please search for something
-    {% endif %}
+{% if object_list %}
+    <h1>Read one of the {{ object_list|length }} matching verses that contains <strong class="bright">{{ search_string }}</strong>, and comment with your reactions and thoughts.</h1>
+    <ul class="results">
+        {% for object in object_list %}
+            <li class="quotewrap">
+                <blockquote class="quote">
+                    {% with object.quote|length as len %}
+                        <h1>{{ object.quote|truncatewords_html:len|safe }}</h1>
+                    {% endwith %}
+                    <cite>{{ object.chapter.get_book_display }}, Chapter {{ object.chapter.chapter }}, Verse {{ object.verse }}
+                        {% if object.verse|add:'1' < object.endverse %} - {{ object.endverse }}{% endif %}</cite>
+                </blockquote>
+                <h2><a href="{{ object.get_absolute_url }}"><img src="{% static img %}" alt="Jesus" />Jesus said <em>it</em></a></h2>
+                <nav class="nav">
+                    <a href="{{ object.get_absolute_url }}">View &amp; Comment</a> | <a href="{{ object.chapter.get_absolute_url }}">View Context</a> | <a href="/">View all</a>
+                </nav>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <h1>There were no matching verses that contained {{ search_string }}</h1>
+    Please search for something
+{% endif %}
 
 <div class="pagination">
     <span class="step-links">
@@ -35,6 +42,5 @@
     </span>
 </div>
 
-</article>
 
 {% endblock %}

@@ -39,10 +39,6 @@ body {
     -webkit-filter: grayscale(0%);
 }
 
-.head {
-    overflow: hidden;
-}
-
 .quote {
     margin: 0;
     background: white;
@@ -124,29 +120,43 @@ body {
     }
 }
 
-h2 {
-    margin-top: 2em;
-    padding-left: 9em;
-    padding-top: 0.3em;
-    margin-bottom: 0.4em;
-    font-size: 1em;
-
-    img {
-        display: block;
-        position: absolute;
-        margin-left: -4em;
-        margin-top: -.3em;
-        width: 3.125em;
-        height: 3.125em;
-        border-radius: 100%;
+.results {
+    margin: 0;
+    padding: 0;
+    div { display: inline; }
+    .quotewrap {
+        padding-bottom: 2em;
     }
+}
 
-    em {
-        color: @red;
-        font-style: normal;
-    }
-    a {
-        color: white;
+.bright { color: white; }
+
+.head, .quotewrap {
+    overflow: hidden;
+    h2 {
+        margin-top: 2em;
+        padding-left: 9em;
+        padding-top: 0.3em;
+        margin-bottom: 0.4em;
+        font-size: 1em;
+
+        img {
+            display: block;
+            position: absolute;
+            margin-left: -4em;
+            margin-top: -.3em;
+            width: 3.125em;
+            height: 3.125em;
+            border-radius: 100%;
+        }
+
+        em {
+            color: @red;
+            font-style: normal;
+        }
+        a {
+            color: white;
+        }
     }
 }
 
@@ -295,7 +305,7 @@ aside {
     height: 3em;
     line-height: 3em;
     text-align: center;
-    color: white;
+    color: white !important;
     background: @grey;
     border-radius: 3em;
     position: fixed;
@@ -328,18 +338,22 @@ aside {
 @media (max-width:320px) {
     html { padding: 0; }
     body { font-size: 0.5em; }
-    header blockquote { padding: 1em 1em 2em 2em; }
-    header { font-size: 1em; }
-    header h2 { padding-left: 4.7em; font-size: 2em; padding-top: 0; }
-    nav { padding-left: 4.5em; font-size: 2em; }
-    header, article { margin-left: 0; margin-right: 0; }
+    .head .quote { padding: 1em 1em 2em 2em; }
+    .head { font-size: 1em; }
+    .head h2 { padding-left: 4.7em; font-size: 2em; padding-top: 0; }
+    .nav { padding-left: 4.5em; font-size: 2em; }
+    .head, article { margin-left: 0; margin-right: 0; }
     article { padding: 2em 1em; font-size: 2em; }
     .chapter-quote { font-size: 2em; }
     .prev, .next { font-size: 1em; }
 }
 
+@media (min-width:321px) and (max-width:719px) {
+    body { font-size: 0.75em; }
+}
+
 @media (max-width:520px) {
-    header ul { display: none; }
+    .head ul { display: none; }
     article { margin-top: 2em; }
 }
 
