@@ -3,6 +3,8 @@
 
 {% block title %}{{ object }} - Jesus said it{% endblock %}
 
+{% block description %}{{ object.quote|striptags }}{% endblock %}
+
 {% block content %}
 <nav>
     {% with prev=object.prev %}
