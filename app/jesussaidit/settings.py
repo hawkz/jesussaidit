@@ -10,19 +10,19 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-BASE_DIR = '/var/www/www.jesussaid.it'
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
 
 # Production / development switches
 # https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
-DEBUG = True
+DEBUG = 'DEBUG' in os.environ
 
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = ['www.jesussaid.it']
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(' ')
 
-SECRET_KEY = '40u=30%et#k$ehj4(f7eodv*h1rn3_qf0_4n5tm11@s1iihe9n'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 
 # Email
@@ -71,34 +71,26 @@ WSGI_APPLICATION = 'jesussaidit.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
+import dj_database_url
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'jesussaidit_django',
-        'USER': 'jesussaidit_django',
-        'PASSWORD': 'AZWLAJ5XXwqA81Uk',
-        'HOST': '2a01:7e00::2:9e09',
-        'PORT': '5439',
-    }
+    'default': dj_database_url.config(),
 }
 
 
 # Caches
 # https://docs.djangoproject.com/en/1.6/topics/cache/
 
-CACHES = {
-    'default': {
+CACHES = {}
+if os.environ.get('MEMCACHED_SERVERS'):
+    CACHES['default'] = {
         'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
-        'LOCATION': '[2a01:7e00::2:9ef1]:11211',
-        'KEY_PREFIX': 'jesussaidit',
-    },
-    'staticfiles': {
-        'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
-        'LOCATION': '[2a01:7e00::2:9ef1]:11211',
-        'KEY_PREFIX': 'jesussaidit',
-        'TIMEOUT': 604800,  # 1 week
+        'LOCATION': os.environ['MEMCACHED_SERVERS'].split(' '),
+        'KEY_PREFIX': os.environ.get('MEMCACHED_PREFIX'),
     }
-}
+else:
+    CACHES['default'] = {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    }
 
 
 # Internationalization
@@ -214,6 +206,6 @@ SITE_ID = 1
 
 # Local settings override
 try:
-    from local_settings import *
+    from local_settings import *  # noqa
 except ImportError:
     pass
