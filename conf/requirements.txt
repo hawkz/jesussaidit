@@ -4,3 +4,4 @@ pylibmc==1.2.3
 psycopg2==2.5.1
 Pillow==2.3.0
 dj-database-url==0.3.0
+raven==5.2.0
