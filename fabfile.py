@@ -111,7 +111,7 @@ def update():
 def migrate():
     """ Migrate database changes. """
     with cd(env.home):
-        run('python manage.py migrate')
+        run('python manage.py syncdb')
 
 
 @task
