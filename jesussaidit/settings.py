@@ -10,7 +10,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
 # Production / development switches
@@ -118,7 +118,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'htdocs/static')
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'app/static'),
+    os.path.join(BASE_DIR, 'static'),
 )
 
 
@@ -134,7 +134,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'htdocs/media')
 # https://docs.djangoproject.com/en/1.6/ref/settings/#templates
 
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'app/jesussaidit/templates'),
+    os.path.join(BASE_DIR, 'templates'),
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -214,6 +214,6 @@ SITE_ID = 1
 
 # Local settings override
 try:
-    from local_settings import *  # noqa
+    from .local_settings import *  # noqa
 except ImportError:
     pass

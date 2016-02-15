@@ -1,7 +1,4 @@
 *.pyc
-/app/jesussaidit/local_settings.py
 /htdocs/media
 /htdocs/static
 /pyenv
-
-.DS_Store
