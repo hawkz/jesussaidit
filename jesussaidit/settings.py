@@ -34,9 +34,9 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-SERVER_EMAIL = 'jesussaidit@blanctools.com'
+SERVER_EMAIL = 'jesussaidit@devsoc.org'
 
-DEFAULT_FROM_EMAIL = 'jesussaidit@blanctools.com'
+DEFAULT_FROM_EMAIL = 'jesussaidit@devsoc.org'
 
 EMAIL_SUBJECT_PREFIX = '[jesussaidit] '
 
